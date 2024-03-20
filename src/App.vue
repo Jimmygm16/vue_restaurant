@@ -13,8 +13,8 @@
 <template>
     <Landing />
     <section class="manage-page">
-      <Dishes_list :dishes="dishes" class="dishes_list"/>
-      <ModalAddDish :appendDish="appendDish" />
+        <Dishes_list :dishes="dishes" class="dishes_list"/>
+        <ModalAddDish :appendDish="appendDish" class="appendDish"/>
     </section>
 </template>
 
@@ -29,7 +29,6 @@
         .appendDish {
             margin-right: 9.5rem; 
             align-items: flex-start;
-            position: relative;
             bottom: 2rem;
         }
         

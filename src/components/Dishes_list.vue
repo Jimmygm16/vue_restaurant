@@ -103,7 +103,7 @@ export default {
             </table>
         </div>
         <div class="main-content">
-            <table v-if="areDishesToPay && totalToPaid > 0">
+            <table v-if="areDishesToPay">
                 <tr>
                     <th>Dish name</th>
                     <th>Price</th>

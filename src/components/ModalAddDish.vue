@@ -106,12 +106,12 @@
     }
 
     .modal-overlay {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: 10;
+        z-index: 1;
         background-color: rgba(0, 0, 0, 0.2);
     }
 
@@ -141,7 +141,6 @@
         .modal-tittle {
             margin: 0;
             padding: 0 0 1.5rem 0;
-            font-family: 'Roboto', sans-serif;
         }
 
         .modal-form {
