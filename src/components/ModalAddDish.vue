@@ -39,11 +39,15 @@
             appendDish: {
                 type: Function,
                 required: true
+            },
+            dishes: {
+                type: Array,
+                required: true
             }
         },
         setup(props) {
             const openModal = ref(false);
-            const dish = {
+            let dish = {
                 name: '',
                 price: 0,
                 paid: 0,
@@ -51,19 +55,29 @@
             }
 
             const addNewDish = (event) => {
+                event.preventDefault();
                 if (!dish.name || !dish.price) {
                     return;
                 }
+                if(props.dishes.some(d => d.name === dish.name)) {
+                    return;
+                }
 
-                event.preventDefault();
                 props.appendDish(dish);
+
+                dish = {
+                    name: '',
+                    price: 0,
+                    paid: 0,
+                    gifted: 0
+                }
+
                 openModal.value = false;
             }
 
             const onChangeInput = (event) => {
                 if (event.target.name === 'price') {
-
-                    dish[event.target.name] = price;
+                    dish[event.target.name] = parseFloat(event.target.value);
                 } else {
                     dish[event.target.name] = event.target.value;
                 }
@@ -99,13 +113,12 @@
     }
 
     .modal-overlay {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         z-index: 1;
-
         background-color: rgba(0, 0, 0, 0.2);
     }
 
@@ -135,7 +148,6 @@
         .modal-tittle {
             margin: 0;
             padding: 0 0 1.5rem 0;
-            font-family: 'Roboto', sans-serif;
         }
 
         .modal-form {

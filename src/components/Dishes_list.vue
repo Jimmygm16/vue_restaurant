@@ -3,15 +3,16 @@ import { ref } from 'vue';
 import Modal from './Modal.vue'
 
 export default {
+    props: {
+        dishes: {
+            type: Array,
+            required: true
+        }
+    },
     components: {
         Modal
     },
-    setup() {
-        const dishes = ref([
-            { name: 'Ajiaco', price: 1000, paid: 0, gifted:0},
-            { name: 'Frijoles', price: 2000, paid: 0, gifted:0}
-        ]);
-
+    setup(props) {
         const areDishesToPay = ref(false)
 
         const actualIndex = ref(-1);
@@ -38,9 +39,22 @@ export default {
             }, 0)
         }
 
+        const showCurrency = (value) => {
+            try {
+                const formatter = new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0,
+                });
+                return formatter.format(value);
+            } catch (error) {
+                return `COP ${value.toFixed(2)}`; 
+            }
+        }
+
         const addDish = (dishData) => {
             if (dishAdded.value && actualIndex.value !== -1 && (dishData.paid > 0 || dishData.gifted > 0)){
-                const dishToPay = dishes.value[actualIndex.value];
+                const dishToPay = props.dishes[actualIndex.value];
                 const existingIndex = dishesToPay.value.findIndex(item => item.name === dishToPay.name);
                 if (existingIndex === -1) {
                     dishToPay.paid = dishData.paid;
@@ -56,7 +70,6 @@ export default {
         }
 
         return {
-            dishes,
             showModal,
             dishAdded,
             dishesToPay,
@@ -65,7 +78,8 @@ export default {
             openModal,
             addDish,
             deleteDish,
-            calculateTotalToPay
+            calculateTotalToPay,
+            showCurrency
         };
     }
 }
@@ -81,7 +95,7 @@ export default {
                 </tr>
                 <tr v-for="(dish, index) in dishes" :key="index">
                     <td>{{ dish.name }}</td>
-                    <td>{{ dish.price }}</td>
+                    <td>{{ showCurrency(dish.price) }}</td>
                     <td>
                         <img class="icon-add" src="../assets/plus.png" @click="openModal(index)" />
                     </td>
@@ -89,7 +103,7 @@ export default {
             </table>
         </div>
         <div class="main-content">
-            <table v-if="areDishesToPay && totalToPaid > 0">
+            <table v-if="areDishesToPay">
                 <tr>
                     <th>Dish name</th>
                     <th>Price</th>
@@ -98,16 +112,16 @@ export default {
                 </tr>
                 <tr v-for="(dishToPay, index) in dishesToPay" :key="index">
                     <td>{{ dishToPay.name }}</td>
-                    <td>{{ dishToPay.price }}</td>
+                    <td>{{ showCurrency(dishToPay.price) }}</td>
                     <td>{{ dishToPay.gifted + dishToPay.paid}}</td>
-                    <td>{{ dishToPay.paid * dishToPay.price }}</td>
+                    <td>{{ showCurrency(dishToPay.paid * dishToPay.price) }}</td>
                     <td> <img class="icon-add" src="../assets/delete.png" @click="deleteDish(index)" /></td>
                 </tr>
                 <tr>
                     <td><b>Total</b></td>
                     <td></td>
                     <td></td>
-                    <td>{{ totalToPaid }}</td>
+                    <td>{{ showCurrency(totalToPaid) }}</td>
                     <td></td>
                 </tr>
             </table>
