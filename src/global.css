@@ -1,0 +1,19 @@
+:root{
+    --crimson: #D82315;
+    --dark-olive-green: #2F1710;
+    --dark-slate-gray: #425164;
+    --tan: #DABB96;
+    --light-slate-gray: #899FB6;
+}
+
+button{
+    padding: 0.3rem 1rem;
+    border: solid 0.1rem black ;
+    border-radius: 0.5rem;
+    background-color: var(--light-slate-gray);
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: var(--dark-slate-gray);
+}
