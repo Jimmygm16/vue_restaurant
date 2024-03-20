@@ -15,9 +15,8 @@
                     Añade tu nuevo plato!
                 </h3>
                 <form class="modal-form" action="">
-                    <input name="name" type="text" placeholder="Nombre del plato" required>
-                    <input name="cost" type="number" placeholder="Costo del plato" required>
-                    <textarea name="description" placeholder="Descripción del plato" cols="30" rows="1" required></textarea>
+                    <input @input="onChangeInput" name="name" type="text" placeholder="Nombre del plato" required>
+                    <input @input="onChangeInput" name="price" type="number" placeholder="Costo del plato" required>
                     <button class="modal-form-button" @click="addNewDish">
                         Añadir plato
                     </button>
@@ -46,20 +45,35 @@
             const openModal = ref(false);
             const dish = {
                 name: '',
-                cost: 0,
-                description: ''
+                price: 0,
+                paid: 0,
+                gifted: 0
             }
 
             const addNewDish = (event) => {
+                if (!dish.name || !dish.price) {
+                    return;
+                }
+
                 event.preventDefault();
                 props.appendDish(dish);
                 openModal.value = false;
+            }
+
+            const onChangeInput = (event) => {
+                if (event.target.name === 'price') {
+
+                    dish[event.target.name] = price;
+                } else {
+                    dish[event.target.name] = event.target.value;
+                }
             }
 
             return {
                 openModal,
                 dish,
                 addNewDish,
+                onChangeInput,
             }
         }
     }
