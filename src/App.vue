@@ -1,4 +1,5 @@
 <script setup>
+    import Dishes_list from './components/Dishes_list.vue';
     import ModalAddDish from './components/ModalAddDish.vue';
     import Landing from './components/Landing.vue';
 
@@ -7,19 +8,14 @@
         dishes.push(dish);
         console.log(dishes)
     }
-
 </script>
 
 <template>
-  <div class="page-content">
     <Landing />
     <ModalAddDish :appendDish="appendDish" />
-  </div>
+    <Dishes_list/>
 </template>
 
 <style scoped>
-  .page-content {
-    margin: 0;
-    padding: 0;
-  }
+
 </style>
