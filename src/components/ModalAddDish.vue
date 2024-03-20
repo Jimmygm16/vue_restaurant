@@ -39,6 +39,10 @@
             appendDish: {
                 type: Function,
                 required: true
+            },
+            dishes: {
+                type: Array,
+                required: true
             }
         },
         setup(props) {
@@ -51,11 +55,14 @@
             }
 
             const addNewDish = (event) => {
+                event.preventDefault();
                 if (!dish.name || !dish.price) {
                     return;
                 }
+                if(props.dishes.some(d => d.name === dish.name)) {
+                    return;
+                }
 
-                event.preventDefault();
                 props.appendDish(dish);
 
                 dish = {

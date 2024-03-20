@@ -14,7 +14,7 @@
     <Landing />
     <section class="manage-page">
         <Dishes_list :dishes="dishes" class="dishes_list"/>
-        <ModalAddDish :appendDish="appendDish" class="appendDish"/>
+        <ModalAddDish :appendDish="appendDish" :dishes="dishes" class="appendDish"/>
     </section>
 </template>
 
