@@ -43,7 +43,7 @@
         },
         setup(props) {
             const openModal = ref(false);
-            const dish = {
+            let dish = {
                 name: '',
                 price: 0,
                 paid: 0,
@@ -57,13 +57,20 @@
 
                 event.preventDefault();
                 props.appendDish(dish);
+
+                dish = {
+                    name: '',
+                    price: 0,
+                    paid: 0,
+                    gifted: 0
+                }
+
                 openModal.value = false;
             }
 
             const onChangeInput = (event) => {
                 if (event.target.name === 'price') {
-
-                    dish[event.target.name] = price;
+                    dish[event.target.name] = parseFloat(event.target.value);
                 } else {
                     dish[event.target.name] = event.target.value;
                 }
@@ -104,7 +111,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: 1;
+        z-index: 98;
 
         background-color: rgba(0, 0, 0, 0.2);
     }
