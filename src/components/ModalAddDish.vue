@@ -2,7 +2,7 @@
     <section>
         <button class="modal-button" @click="openModal = true">
             <span>
-                Añadir plato!
+                Add a dish!
             </span> 
         </button>
         <transition name="fade" appear>
@@ -12,14 +12,16 @@
         <transition name="fade" appear>
             <div class="modal-content" v-if="openModal">
                 <h3 class="modal-tittle">
-                    Añade tu nuevo plato!
+                    Add your new dish!
                 </h3>
                 <form class="modal-form" action="">
-                    <input @input="onChangeInput" name="name" type="text" placeholder="Nombre del plato" required>
-                    <input @input="onChangeInput" name="price" type="number" placeholder="Costo del plato" required>
-                    <button class="modal-form-button" @click="addNewDish">
-                        Añadir plato
-                    </button>
+                    <input @input="onChangeInput" name="name" type="text" placeholder="DISH NAME" required>
+                    <input @input="onChangeInput" name="price" type="number" placeholder="DISH PRICE" required>
+                    <div class="button-modal">
+                        <button class="modal-form-button" @click="addNewDish">
+                            add
+                        </button>
+                    </div>
                 </form>
             </div>
         </transition>
@@ -168,5 +170,10 @@
                 transition: border-color 0.3s;
             }
         }
+    }
+
+    .button-modal{
+        display: flex;
+        justify-content: center;
     }
 </style>

@@ -13,7 +13,7 @@ export default {
         Modal
     },
     setup(props) {
-        const areDishesToPay = ref(false)
+        const areDishesToPay = ref(false);
 
         const actualIndex = ref(-1);
         const dishAdded = ref(false);
@@ -27,7 +27,7 @@ export default {
             actualIndex.value = key;
         };
 
-        const deleteDish = (index)=>{
+        const deleteDishToPay = (index)=>{
             dishesToPay.value.splice(index, 1);
             dishesToPay.value.length > 0 ? areDishesToPay.value = true : areDishesToPay.value = false;
             calculateTotalToPay();
@@ -77,7 +77,7 @@ export default {
             totalToPaid,
             openModal,
             addDish,
-            deleteDish,
+            deleteDishToPay,
             calculateTotalToPay,
             showCurrency
         };
@@ -88,7 +88,7 @@ export default {
 <template>
     <div class="dishes-result">
         <div>
-            <table>
+            <table v-if="dishes.length > 0">
                 <tr>
                     <th>Dish name</th>
                     <th>Price</th>
@@ -101,6 +101,9 @@ export default {
                     </td>
                 </tr>
             </table>
+            <div class="empty-list"v-else-if="dishes.length == 0">
+                <h1>Dishes list</h1>
+            </div>
         </div>
         <div class="main-content">
             <table v-if="areDishesToPay">
@@ -115,7 +118,7 @@ export default {
                     <td>{{ showCurrency(dishToPay.price) }}</td>
                     <td>{{ dishToPay.gifted + dishToPay.paid}}</td>
                     <td>{{ showCurrency(dishToPay.paid * dishToPay.price) }}</td>
-                    <td> <img class="icon-add" src="../assets/delete.png" @click="deleteDish(index)" /></td>
+                    <td> <img class="icon-add" src="../assets/delete.png" @click="deleteDishToPay(index)" /></td>
                 </tr>
                 <tr>
                     <td><b>Total</b></td>
@@ -125,7 +128,7 @@ export default {
                     <td></td>
                 </tr>
             </table>
-            <div v-else-if="totalToPaid == 0" class="content-message">
+            <div v-if="totalToPaid == 0" class="content-message">
                 <h1>There is nothing to pay!</h1>
             </div>
         </div>
@@ -165,24 +168,43 @@ export default {
     }
 
     .content-message{
+        display: flex;
         border: solid 0.1rem var(--light-slate-gray);
         width: fit-content;
         border-radius: 0.8rem;
         padding: 1rem;
         background-color: var(--tan);
+        align-items: center;
+        text-transform: uppercase;
+        padding: 4rem;
     }
 
     .main-content{
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         width: 100%;
+        height: fit-content;
+        gap:2rem;
     }
 
     .dishes-result{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         padding: 3rem;
-        gap: 2rem;
+        gap: 10rem;
+    }
+
+    .empty-list{
+        display: flex;
+        border: solid 0.1rem var(--light-slate-gray);
+        width: 28rem;
+        border-radius: 0.8rem;
+        padding: 1rem;
+        background-color: var(--tan);
+        justify-content: center;
+        align-items: center;
+        text-transform: uppercase;
+        padding: 4rem;
     }
 
 </style>

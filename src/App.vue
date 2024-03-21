@@ -12,25 +12,42 @@
 
 <template>
     <Landing />
-    <section class="manage-page">
-        <Dishes_list :dishes="dishes" class="dishes_list"/>
-        <ModalAddDish :appendDish="appendDish" :dishes="dishes" class="appendDish"/>
-    </section>
+    <div class="forms-container">
+        <div class="title-container">
+            <h1>PJ RESTAURANT</h1>
+        </div>
+        <section class="manage-page">
+            <Dishes_list :dishes="dishes" class="dishes_list"/>
+            <ModalAddDish :appendDish="appendDish" :dishes="dishes" class="appendDish"/>
+        </section>
+    </div>
 </template>
 
 <style scoped>
     .manage-page {
         display: flex;
-        height: 100vh;
         justify-content: center;
         align-items: center;
         flex-direction: column;
 
         .appendDish {
-            margin-right: 9.5rem; 
+            position: absolute;
+            top: 58rem;
             align-items: flex-start;
             bottom: 2rem;
         }
         
+    }
+
+    .forms-container{
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .title-container{
+        display: flex;
+        justify-content: center;
+        padding: 4rem;
     }
 </style>
