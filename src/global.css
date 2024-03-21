@@ -6,6 +6,13 @@
     --light-slate-gray: #899FB6;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
 button{
     background-color: #899FB6;
     color: white;

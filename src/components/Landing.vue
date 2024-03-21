@@ -44,6 +44,7 @@
                 justify-content: center;
                 flex-direction: column;
                 height: 100vh;
+                gap: 8rem;
 
                 .page-tittle {
                     display: flex;
