@@ -121,7 +121,7 @@ export default {
                 </tr>
             </table>
             <div class="empty-list"v-else-if="dishes.length == 0">
-                <h1>Dishes list</h1>
+                <h1>Dishes list 📋</h1>
             </div>
         </div>
         <div class="main-content">
@@ -148,7 +148,7 @@ export default {
                 </tr>
             </table>
             <div v-if="totalToPaid == 0" class="content-message">
-                <h1>There is nothing to pay!</h1>
+                <h1>There is nothing to pay! 📝</h1>
             </div>
         </div>
     </div>
@@ -186,16 +186,18 @@ export default {
         cursor: pointer;
     }
 
-    .content-message{
+    .content-message, .empty-list {
         display: flex;
         border: solid 0.1rem var(--light-slate-gray);
-        width: fit-content;
+        min-width: 40vw;
         border-radius: 0.8rem;
-        padding: 1rem;
         background-color: var(--tan);
         align-items: center;
         text-transform: uppercase;
-        padding: 4rem;
+        font-size: 0.8rem;
+        justify-content: center;
+        padding: 4rem 0;
+        box-shadow: 0 0 0.5rem 0.1rem var(--light-slate-gray);
     }
 
     .main-content{
@@ -203,7 +205,6 @@ export default {
         grid-template-columns: repeat(1, 1fr);
         width: 100%;
         height: fit-content;
-        gap:2rem;
     }
 
     .dishes-result{
@@ -211,19 +212,6 @@ export default {
         grid-template-columns: repeat(2, 1fr);
         padding: 3rem;
         gap: 10rem;
-    }
-
-    .empty-list{
-        display: flex;
-        border: solid 0.1rem var(--light-slate-gray);
-        width: 28rem;
-        border-radius: 0.8rem;
-        padding: 1rem;
-        background-color: var(--tan);
-        justify-content: center;
-        align-items: center;
-        text-transform: uppercase;
-        padding: 4rem;
     }
 
 </style>
