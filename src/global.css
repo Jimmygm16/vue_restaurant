@@ -1,0 +1,30 @@
+:root{
+    --crimson: #D82315;
+    --dark-olive-green: #2F1710;
+    --dark-slate-gray: #425164;
+    --tan: #DABB96;
+    --light-slate-gray: #899FB6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+button{
+    background-color: #899FB6;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border: none;
+    font-size: medium;
+    transition: background-color 0.3s;
+}
+
+button:hover{
+    background-color: #425164;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.2);
+}

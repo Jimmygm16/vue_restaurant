@@ -9,6 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.1.1",
+    "@vue-hero-icons/outline": "^1.7.2",
+    "oh-vue-icons": "^1.0.0-rc3",
     "vue": "^3.4.21"
   },
   "devDependencies": {
