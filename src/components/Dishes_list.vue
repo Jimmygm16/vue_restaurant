@@ -52,8 +52,23 @@ export default {
             }
         }
 
+        const deleteavaliableDish = (index) => {
+            props.dishes.splice(index, 1);
+        }
+
         const addDish = (dishData) => {
+
             if (dishAdded.value && actualIndex.value !== -1 && (dishData.paid > 0 || dishData.gifted > 0)){
+
+                if(dishesToPay.value.some(d => d.name === props.dishes[actualIndex.value].name)){
+                    const existingIndex = dishesToPay.value.findIndex(item => item.name === props.dishes[actualIndex.value].name);
+                    dishesToPay.value[existingIndex].paid += dishData.paid;
+                    dishesToPay.value[existingIndex].gifted += dishData.gifted;
+                    dishAdded.value = false;
+                    calculateTotalToPay();
+                    return;
+                }
+
                 const dishToPay = props.dishes[actualIndex.value];
                 const existingIndex = dishesToPay.value.findIndex(item => item.name === dishToPay.name);
                 if (existingIndex === -1) {
@@ -79,7 +94,8 @@ export default {
             addDish,
             deleteDishToPay,
             calculateTotalToPay,
-            showCurrency
+            showCurrency,
+            deleteavaliableDish
         };
     }
 }
@@ -98,6 +114,9 @@ export default {
                     <td>{{ showCurrency(dish.price) }}</td>
                     <td>
                         <img class="icon-add" src="../assets/plus.png" @click="openModal(index)" />
+                    </td>
+                    <td>
+                        <img class="icon-add" src="../assets/delete.png" @click="deleteavaliableDish(index)" />
                     </td>
                 </tr>
             </table>
