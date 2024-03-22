@@ -107,6 +107,10 @@
         transition: background-color 0.3s;
     }
 
+    .modal-button {
+        font-size: 1.3rem;
+    }
+
     .modal-button:hover,
     .modal-form-button:hover {
         background-color: #425164;
